@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import React from "react";
 
-const Home = () => {
-  return <div>Home</div>;
-=======
 import { useAuthStore } from "../store/authStore.js";
 
 const Home = () => {
@@ -41,7 +37,6 @@ const Home = () => {
       </div>
     </div>
   );
->>>>>>> d98c783 (pushing final code)
 };
 
 export default Home;

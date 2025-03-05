@@ -14,6 +14,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRouter);
 
+
+
 app.listen(PORT, () => {
   connectDB();
   console.log(`Server listening on http://localhost:${PORT}`);

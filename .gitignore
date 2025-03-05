@@ -1,4 +1,5 @@
 # Global ignores for root
 *.log
 *.env.local
+*.env.production
 node_modules/

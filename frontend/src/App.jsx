@@ -1,6 +1,6 @@
 
 import React from "react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";

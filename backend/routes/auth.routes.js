@@ -1,16 +1,10 @@
 import { Router } from "express";
 import {
   checkAuth,
-  signin,
-  signout,
-  signup,
-} from "../controller/auth.controller.js";
-import {
-  checkAuth,
-  signin,
-  signout,
-  signup,
   logout,
+  signin,
+  signout,
+  signup,
 } from "../controller/auth.controller.js";
 
 import { verifyToken } from "../middleware/verifyToken.middleware.js";
