@@ -49,6 +49,10 @@ export const useAuthStore = create((set) => ({
         error: null,
         isLoading: false,
       });
+<<<<<<< HEAD
+=======
+      await useAuthStore.getState().checkAuth();
+>>>>>>> d98c783 (pushing final code)
     } catch (error) {
       set({
         error: error.response?.data?.message || "Error logging in",
@@ -58,6 +62,28 @@ export const useAuthStore = create((set) => ({
     }
   },
 
+<<<<<<< HEAD
+=======
+  checkAuth: async () => {
+    set({ isCheckingAuth: true, error: null });
+    try {
+      const response = await axios.get(`${API_URL}/check-auth`);
+      set({
+        user: response.data.user,
+        isAuthenticated: true,
+        isCheckingAuth: false,
+      });
+    } catch (error) {
+      set({
+        user: null,
+        error: error.response?.data?.message || "NOt Authenticated",
+        isCheckingAuth: false,
+        isAuthenticated: false,
+      });
+    }
+  },
+
+>>>>>>> d98c783 (pushing final code)
   logout: async () => {
     set({ isLoading: true, error: null });
     try {
@@ -73,6 +99,7 @@ export const useAuthStore = create((set) => ({
       throw error;
     }
   },
+<<<<<<< HEAD
 
   checkAuth: async () => {
     set({ isCheckingAuth: true, error: null });
@@ -87,4 +114,6 @@ export const useAuthStore = create((set) => ({
       set({ error: null, isCheckingAuth: false, isAuthenticated: false });
     }
   },
+=======
+>>>>>>> d98c783 (pushing final code)
 }));

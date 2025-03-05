@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React from "react";
+=======
+import React, { useEffect } from "react";
+>>>>>>> d98c783 (pushing final code)
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import Home from "./components/Home";
@@ -26,6 +30,16 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 const App = () => {
+<<<<<<< HEAD
+=======
+  const { checkAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  
+>>>>>>> d98c783 (pushing final code)
   return (
     <BrowserRouter>
       <Routes>

@@ -9,7 +9,11 @@ export default function SignIn() {
     password: "",
   });
 
+<<<<<<< HEAD
   const navigate = useNavigate()
+=======
+  const navigate = useNavigate();
+>>>>>>> d98c783 (pushing final code)
   const [submitted, setSubmitted] = useState(false);
   const [valid, setValid] = useState(false);
   const { signin, isLoading, error } = useAuthStore();
@@ -80,6 +84,16 @@ export default function SignIn() {
         <button className="form-field" type="submit" disabled={isLoading}>
           {isLoading ? "Signing in..." : "Sign In"}
         </button>
+<<<<<<< HEAD
+=======
+
+        <p>
+          Don't have an account?{" "}
+          <button type="button" onClick={() => navigate("/signup")}>
+            Sign up
+          </button>
+        </p>
+>>>>>>> d98c783 (pushing final code)
       </form>
     </div>
   );

@@ -1,6 +1,5 @@
 import User from "../models/user.models.js";
 import bcrypt from "bcryptjs";
-import { randomBytes } from "crypto";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
@@ -116,4 +115,13 @@ export const checkAuth = async (req, res) => {
     console.log("Error in checkAuth ", error);
     res.status(400).json({ success: false, message: error.message });
   }
+<<<<<<< HEAD
 };
+=======
+};
+
+export const logout = async (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({ success: true, message: "Logged out successfully" });
+};
+>>>>>>> d98c783 (pushing final code)
