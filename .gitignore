@@ -1,2 +1,4 @@
-node_modules/
+# Global ignores for root
+*.log
 *.env.local
+node_modules/
