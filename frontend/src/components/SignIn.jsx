@@ -1,4 +1,6 @@
-import "./SignUp.css";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
+import "./SignIn.css";
 import React, { useState } from "react";
 
 export default function SignIn() {
@@ -7,86 +9,77 @@ export default function SignIn() {
     password: "",
   });
 
-  const handleInputChange = (event) => {
-    event.preventDefault();
+  const navigate = useNavigate()
+  const [submitted, setSubmitted] = useState(false);
+  const [valid, setValid] = useState(false);
+  const { signin, isLoading, error } = useAuthStore();
 
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setValues((values) => ({
-      ...values,
+    setValues((prevValues) => ({
+      ...prevValues,
       [name]: value,
     }));
   };
 
-  const [submitted, setSubmitted] = useState(false);
-  const [valid, setValid] = useState(false);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitted(true);
+
     if (values.email && values.password) {
       setValid(true);
+      try {
+        await signin(values.email, values.password);
+        navigate("/home");
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    } else {
+      setValid(false);
     }
-    setSubmitted(true);
   };
 
   return (
     <div className="form-container">
-      <form className="register-form" onSubmit={handleSubmit}>
-        {submitted && valid && (
+      <form className="signin-form" onSubmit={handleSubmit}>
+        {submitted && valid && !error && (
           <div className="success-message">
-            <h3>Welcome {values.name}</h3>
-            <div>Your registration was successful!</div>
+            <h3>Welcome</h3>
+            <div>Your sign-in was successful</div>
           </div>
         )}
-        {!valid && (
-          <input
-            className="form-field"
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={values.name}
-            onChange={handleInputChange}
-          />
-        )}
 
-        {submitted && !values.name && (
-          <span id="name-error">Please enter a name</span>
-        )}
+        {error && <div className="error-message">{error}</div>}
 
-        {!valid && (
-          <input
-            className="form-field"
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={values.email}
-            onChange={handleInputChange}
-          />
-        )}
-
+        <input
+          className="form-field"
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={values.email}
+          onChange={handleInputChange}
+          disabled={isLoading}
+        />
         {submitted && !values.email && (
           <span id="email-error">Please enter an email address</span>
         )}
 
-        {!valid && (
-          <input
-            className="form-field"
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={values.password}
-            onChange={handleInputChange}
-          />
-        )}
-
+        <input
+          className="form-field"
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={values.password}
+          onChange={handleInputChange}
+          disabled={isLoading}
+        />
         {submitted && !values.password && (
           <span id="password-error">Please enter a password</span>
         )}
 
-        {!valid && (
-          <button className="form-field" type="submit">
-            Register
-          </button>
-        )}
+        <button className="form-field" type="submit" disabled={isLoading}>
+          {isLoading ? "Signing in..." : "Sign In"}
+        </button>
       </form>
     </div>
   );
